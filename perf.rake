@@ -1,6 +1,7 @@
 '.:lib:test:config'.split(':').each { |x| $: << x }
 
 require 'application'
+require 'objspace'
 
 TEST_CNT  = (ENV['KO1TEST_CNT'] || 1_000).to_i
 TEST_PATH = ENV['KO1TEST_PATH'] || '/'
@@ -65,7 +66,7 @@ task :allocated_objects do
   imem = 0
   ObjectSpace.each_object(String) do |s|
     c[s] -= 1
-    imem += SIZEOF_RSTRING
+    imem += SIZEOF_RSTRING + ObjectSpace.memsize_of(s)
   end
 
   TEST_CNT.times { do_test_task(app) }
@@ -74,7 +75,7 @@ task :allocated_objects do
   fmem = 0
   ObjectSpace.each_object(String) do |s|
     c[s] += 1
-    fmem += SIZEOF_RSTRING
+    fmem += SIZEOF_RSTRING + ObjectSpace.memsize_of(s)
   end
 
   c.keys.sort_by {|a, b| c[b] <=> c[a]}.each do |k|
