@@ -5,6 +5,8 @@ require 'application'
 TEST_CNT  = (ENV['KO1TEST_CNT'] || 1_000).to_i
 TEST_PATH = ENV['KO1TEST_PATH'] || '/'
 
+SIZEOF_RSTRING = 40
+
 Rails.application.initialize!
 
 class NullLog
@@ -63,7 +65,7 @@ task :allocated_objects do
   imem = 0
   ObjectSpace.each_object(String) do |s|
     c[s] -= 1
-    imem += s.length
+    imem += SIZEOF_RSTRING
   end
 
   TEST_CNT.times { do_test_task(app) }
@@ -72,7 +74,7 @@ task :allocated_objects do
   fmem = 0
   ObjectSpace.each_object(String) do |s|
     c[s] += 1
-    fmem += s.length
+    fmem += SIZEOF_RSTRING
   end
 
   c.keys.sort_by {|a, b| c[b] <=> c[a]}.each do |k|

@@ -21,7 +21,8 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: b6f189e2f0bcc8f36f52c83e8ac2255d5e578a42
+  revision: e868c9b65265e220109e37919e753fc1899b63f4
+  branch: fxn/string-pools
   specs:
     actionmailer (4.1.0.beta)
       actionpack (= 4.1.0.beta)

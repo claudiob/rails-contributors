@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #gem 'rails', '4.0.1'
-gem 'rails', github: 'rails/rails'#, branch: 'fxn/string-pools'
+gem 'rails', github: 'rails/rails', branch: 'fxn/string-pools'
 gem 'arel', github: 'rails/arel'
 
 #gem 'ruby-prof'
