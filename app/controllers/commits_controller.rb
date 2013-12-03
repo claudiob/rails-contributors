@@ -1,5 +1,5 @@
 class CommitsController < ApplicationController
-  caches_page :index, :in_time_window, :in_release, :in_edge
+  #caches_page :index, :in_time_window, :in_release, :in_edge
 
   before_action :set_target, only: %w(index in_release)
   before_action :set_contributor, only: %w(in_edge in_time_window)

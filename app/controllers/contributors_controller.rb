@@ -1,5 +1,5 @@
 class ContributorsController < ApplicationController
-  caches_page :index, :in_time_window, :in_edge
+#  caches_page :index, :in_time_window, :in_edge
 
   def index
     @contributors = if params[:release_id].present?
