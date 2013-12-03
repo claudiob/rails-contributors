@@ -76,14 +76,18 @@ task :allocated_objects do
   end
 
   c.keys.sort_by {|a, b| c[b] <=> c[a]}.each do |k|
-    puts "#{k} => #{c[k]/TEST_CNT.to_f}" if c[k]/TEST_CNT.to_f > 3000
+    puts "#{k} => #{per_request(c[k])}" if per_request(c[k]) > 3000
   end
 
   GC.enable
 
   finish.each do |k, v|
-    p k => (v - start[k]) / TEST_CNT.to_f
+    p k => per_request(v - start[k])
   end
 
-  puts "string mem per request: #{(fmem - imem)/TEST_CNT.to_f}"
+  puts "string mem per request: #{per_request(fmem - imem)}"
+end
+
+def per_request(amount)
+  amount/TEST_CNT.to_f
 end
