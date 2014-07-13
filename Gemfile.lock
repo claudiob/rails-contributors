@@ -150,7 +150,7 @@ DEPENDENCIES
   delorean
   mysql2
   rails (~> 4.1.4)
-  rugged
+  rugged (~> 0.21.0)
   sass-rails (~> 4.0.3)
   spring
   turbolinks
